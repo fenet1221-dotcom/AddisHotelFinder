@@ -1,12 +1,18 @@
+require("dotenv").config();
 const express = require("express");
 const app = express();
 const pool = require("./db");
 
 app.use(express.json());
 const authRoutes = require("./routes/authRoutes");
-
+const authenticateToken = require("./middleware/authMiddleware");
 app.use("/api/auth", authRoutes);
-
+app.get("/api/protected", authenticateToken, (req, res) => {
+    res.json({
+        message: "Access granted!",
+        user: req.user
+    });
+});
 app.get("/", (req, res) => {
     res.send("Hotel Booking API is running");
 });

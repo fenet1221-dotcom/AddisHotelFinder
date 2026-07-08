@@ -92,7 +92,7 @@ const login = async (req, res) => {
                 id: user.user_id,
                 role: user.role
             },
-            "secretkey",
+            process.env.JWT_SECRET,
             {
                 expiresIn: "1h"
             }
