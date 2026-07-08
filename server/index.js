@@ -5,14 +5,17 @@ const pool = require("./db");
 
 app.use(express.json());
 const authRoutes = require("./routes/authRoutes");
+const hotelRoutes = require("./routes/hotelRoutes");
 const authenticateToken = require("./middleware/authMiddleware");
 app.use("/api/auth", authRoutes);
+app.use("/api/hotels", hotelRoutes);
 app.get("/api/protected", authenticateToken, (req, res) => {
     res.json({
         message: "Access granted!",
         user: req.user
     });
 });
+
 app.get("/", (req, res) => {
     res.send("Hotel Booking API is running");
 });
