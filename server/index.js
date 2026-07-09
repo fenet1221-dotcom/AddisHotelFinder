@@ -2,13 +2,18 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const pool = require("./db");
+const morgan = require("morgan");
 
 app.use(express.json());
+app.use(morgan("dev"));
 const authRoutes = require("./routes/authRoutes");
 const hotelRoutes = require("./routes/hotelRoutes");
 const roomRoutes = require("./routes/roomRoutes");
 const bookingRoutes = require("./routes/bookingRoutes");
 const authenticateToken = require("./middleware/authMiddleware");
+
+
+app.use(morgan("combined"));
 app.use("/api/auth", authRoutes);
 app.use("/api/hotels", hotelRoutes);
 app.use("/api/rooms", roomRoutes);
