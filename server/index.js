@@ -7,10 +7,12 @@ app.use(express.json());
 const authRoutes = require("./routes/authRoutes");
 const hotelRoutes = require("./routes/hotelRoutes");
 const roomRoutes = require("./routes/roomRoutes");
+const bookingRoutes = require("./routes/bookingRoutes");
 const authenticateToken = require("./middleware/authMiddleware");
 app.use("/api/auth", authRoutes);
 app.use("/api/hotels", hotelRoutes);
 app.use("/api/rooms", roomRoutes);
+app.use("/api/bookings", bookingRoutes);
 app.get("/api/protected", authenticateToken, (req, res) => {
     res.json({
         message: "Access granted!",
