@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-
+const authorizeRole = require("../middleware/roleMiddleware");
 const authenticateToken = require("../middleware/authMiddleware");
 
 const {
@@ -19,11 +19,11 @@ router.get("/:id", getRoom);
 
 
 // Protected routes
-router.post("/", authenticateToken, addRoom);
+router.post("/", authenticateToken, authorizeRole("admin"), addRoom);
 
-router.put("/:id", authenticateToken, editRoom);
+router.put("/:id", authenticateToken, authorizeRole("admin"), editRoom);
 
-router.delete("/:id", authenticateToken, removeRoom);
+router.delete("/:id", authenticateToken, authorizeRole("admin"), removeRoom);
 
 
 module.exports = router;
