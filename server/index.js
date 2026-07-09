@@ -3,8 +3,10 @@ const express = require("express");
 const app = express();
 const pool = require("./db");
 const morgan = require("morgan");
+const cors = require("cors");
 
 app.use(express.json());
+app.use(cors());
 app.use(morgan("dev"));
 const authRoutes = require("./routes/authRoutes");
 const hotelRoutes = require("./routes/hotelRoutes");
